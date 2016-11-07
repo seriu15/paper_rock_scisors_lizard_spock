@@ -1,0 +1,9 @@
+div.container {
+  padding: 10px 0;
+}
+
+.img-howToPlay {
+  margin: 0 auto;
+  max-height: 300px;
+  max-width: 300px;
+}
