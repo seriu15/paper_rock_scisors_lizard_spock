@@ -7,3 +7,20 @@ div.container {
   max-height: 300px;
   max-width: 300px;
 }
+
+button.badge, button span.badge, button i.badge {
+  background-color: inherit;
+}
+
+.mainView {
+  display: flex;
+  justify-content: center;
+}
+
+.imgElement {
+  padding: 0 20px;
+}
+
+form {
+  padding-bottom: 20px;
+}

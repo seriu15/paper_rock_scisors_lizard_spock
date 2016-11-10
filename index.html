@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Gra w papier kamien nozyce jaszczurka spock</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -19,49 +20,98 @@
       <span class="label label-success">Jaszczurka</span>
       <span class="label label-info">Spock</span>
     </h3><br>
-    <img src="img/howToPlay.png" class="img-responsive img-howToPlay" alt="how to play">
+
+    <div class="mainView">
+      <div class="text-center js-resultsTableElement">
+        <span id="js-playerPoints" class="badge">
+        0
+        </span>
+        <span id="js-playerName">
+        Imię gracza
+        </span>
+        <div class="text-center">
+          <span id="js-playerPick">
+            Wybór gracza
+          </span>
+        </div>
+        <div id="js-playerChoiceView" class="text-center">
+        </div>
+        <div class="text-center">
+          <span id="js-playerResult">
+            Wynik gracza
+          </span>
+        </div>
+      </div>
+
+      <div class="imgElement">
+        <img src="img/howToPlay.png" class="img-responsive img-howToPlay" alt="how to play">
+      </div>
+
+      <div class="text-center js-resultsTableElement">
+        <span id="js-computerPoints" class="badge">
+        0
+        </span>
+        Komputer
+        <div class="text-center">
+          <span id="js-computerPick">
+            Wybór komputera
+          </span>
+        </div>
+        <div id="js-computerChoiceView" class="text-center">
+        </div>
+        <div class="text-center">
+          <span id="js-computerResult">
+            Wynik komputera
+          </span>
+        </div>
+      </div>
+
+    </div>
+
   </div>
   <div id="js-newGameElement" class="container">
     <div class="row text-center">
-      <button  id="js-newGameButton" class="btn btn-default">
-        Nowa Gra
-      </button>
+      <form id="js-newGameForm" class="form-inline">
+        <div class="form-group">
+          <label for="name">Podaj swoje imię:</label>
+          <input type="text" class="form-control" id="name" value="Gracz">
+        </div>
+        <button type="button" id="js-newGameButton" class="btn btn-lg btn-warning">
+          Nowa Gra
+        </button>
+      </form>
     </div>
   </div>
   <div id="js-playerPickElement" class="container">
     <div class="row text-center">
-      <button id="js-playerPick_rock" class="btn">
+      <button id="js-playerPick_rock" class="btn label-default choice" data-choice="rock">
         <span class="badge">
-          <i class="fa fa-hand-rock-o" aria-hidden="true"></i>
+          <i class="fa fa-hand-rock-o fa-5x" aria-hidden="true"></i>
         </span>
-        Kamień
       </button>
-      <button id="js-playerPick_paper"  class="btn">
-        <span class="badge">
-        <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+      <button id="js-playerPick_paper"  class="btn label-danger choice" data-choice="paper">
+        <span class="badge ">
+        <i class="fa fa-hand-paper-o fa-5x" aria-hidden="true"></i>
         </span>
-        Papier
       </button>
-      <button id="js-playerPick_scissors"  class="btn">
+      <button id="js-playerPick_scissors"  class="btn label-primary choice" data-choice="scissors">
         <span class="badge">
-        <i class="fa fa-hand-scissors-o" aria-hidden="true"></i>
+        <i class="fa fa-hand-scissors-o fa-5x" aria-hidden="true"></i>
         </span>
-        Nożyce
       </button>
-      <button id="js-playerPick_lizard"  class="btn">
+      <button id="js-playerPick_lizard"  class="btn label-success choice" data-choice="lizard">
         <span class="badge">
-        <i class="fa fa-hand-lizard-o" aria-hidden="true"></i>
+        <i class="fa fa-hand-lizard-o fa-5x" aria-hidden="true"></i>
         </span>
-        Jaszczurka
       </button>
-      <button id="js-playerPick_spock"  class="btn">
+      <button id="js-playerPick_spock" class="btn label-info choice" data-choice="spock">
         <span class="badge">
-        <i class="fa fa-hand-spock-o" aria-hidden="true"></i>
+        <i class="fa fa-hand-spock-o fa-5x" aria-hidden="true"></i>
         </span>
-        Spock
       </button>
     </div>
   </div>
+<!--
   <div id="js-resultsTableElement" class="container">
     <div class="row">
       <div class="col-xs-5 text-center">
@@ -109,8 +159,10 @@
       </div>
     </div>
   </div>
-
-
+-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
 </body>
 </html>
