@@ -4,7 +4,6 @@ GameState = {
   Ended: "ended"
 }
 
-
 function Choice(objectName, objectClass, objectFont) {
   this.objectName = objectName;
   this.objectClass = objectClass;
@@ -17,46 +16,17 @@ var scissors = new Choice("Nożyce", "label-primary", "scissors");
 var lizard = new Choice("Jaszczurka", "label-success", "lizard");
 var spock = new Choice("Spock", "label-info", "spock");
 
-/*
-badge label-default - Kamień
-badge label-danger - Papier
-badge label-primary - Nożyce
-badge label-success - Jaszczurka
-badge label-info - Spock
-*/
-/*
-var rock = {
-      name: 'Kamień',
-      myClass: 'badge label-default'
-    },
-    paper = {
-      name: 'Papier',
-      myClass: 'badge label-danger'
-    },
-    scissors = {
-      name: 'Nożyce',
-      myClass: 'badge label-primary'
-    },
-    lizard = {
-      name: 'Jaszczurka',
-      myClass: 'badge label-success'
-    },
-    spock = {
-      name: 'Spock',
-      myClass: 'badge label-info'
-    };
-*/
 var newGameElem = $('#js-newGameElement');
 var pickElem = $('#js-playerPickElement');
 var resultsElem = $('.js-resultsTableElement');
 var newGameBtn = $('#js-newGameButton');
 var computerPickElem = $('#js-computerPick');
 var playerPickElem = $('#js-playerPick');
-var computerResultElem = $('#js-computerResult');
 var playerResultElem = $('#js-playerResult');
 var playerName = $('#js-playerName');
 var playerChoiceView = $("#js-playerChoiceView");
 var computerChoiceView = $('#js-computerChoiceView');
+var playOnceMore = $("#js-onceMore");
 
 newGameBtn.on('click', function() {
   player.name = $("#name").val();
@@ -87,10 +57,10 @@ function setGameElements() {
         computerChoiceView.css('display', 'block');
         computerPickElem.text('Wybór komputera');
         playerPickElem.text('Wybór gracza');
-        computerResultElem.text('Wynik komputera');
-        playerResultElem.text('Wynik gracza');
+        playerResultElem.text('Wynik');
         playerChoiceView.html('');
         computerChoiceView.html('');
+        playOnceMore.css('display', 'none');
 
       break;
     case GameState.Ended:
@@ -103,6 +73,7 @@ function setGameElements() {
         playerChoiceView.css('display', 'none');
         computerChoiceView.css('display', 'none');
         $('#name').val('Gracz');
+        playOnceMore.css('display', 'none');
   }
 }
 
@@ -128,8 +99,6 @@ function getComputerPick() {
 
 function checkRoundWinner(playerPick, computerPick) {
   playerResultElem.text('');
-  computerResultElem.text('');
-
   var winnerIs = 'player';
 
   if (playerPick == computerPick) {
@@ -146,15 +115,15 @@ function checkRoundWinner(playerPick, computerPick) {
 
   if (winnerIs == 'player') {
     playerResultElem.text('Wygrana!').hide().fadeIn(2000);
+    playerResultElem.removeClass().addClass("text-center text-success");
     player.score++;
-    console.log(player.score);
   } else if (winnerIs == 'computer') {
-    computerResultElem.text('Wygrana!').hide().fadeIn(2000);
+    playerResultElem.text('Przegrana!').hide().fadeIn(2000);
+    playerResultElem.removeClass().addClass("text-center text-danger");
     computer.score++;
-    console.log(computer.score);
   } else {
     playerResultElem.text('Remis!').hide().fadeIn(2000);
-    computerResultElem.text('Remis!').hide().fadeIn(2000);
+    playerResultElem.removeClass().addClass("text-center text-warning");
   }
   setGamePoints();
 }
@@ -206,25 +175,21 @@ function setGamePoints() {
 
 // check if player or computer have 10 points
 function checkWiner() {
-  if (player.score == 10) {
+  if (player.score == 3) {  //ma byc 10
+    pickElem.css('display', 'none');
     onceMore("Wygrałeś");
-  } else if (computer.score == 10) {
+  } else if (computer.score == 3) {  //ma byc 10
+    pickElem.css('display', 'none');
     onceMore("Przegrałeś");
   }
 }
 
 function onceMore(text) {
   gameState = GameState.Ended;
-  if (confirm(text) == true) {
-    newGame();
-  } else {
-    alert("Moze innym razem !")
-  }
+  playOnceMore.css('display', 'block');
+  $("#js-onceMoreButton").on('click', function() {
+    playOnceMore.css('display', 'none');
+    newGameElem.css('display', 'block');
+  });
   setGamePoints();
-  setGameElements();
-}
-
-function onceMoore(text) {
-  gameState = GameState.Ended;
-
 }
