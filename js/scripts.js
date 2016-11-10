@@ -4,6 +4,48 @@ GameState = {
   Ended: "ended"
 }
 
+
+function Choice(objectName, objectClass, objectFont) {
+  this.objectName = objectName;
+  this.objectClass = objectClass;
+  this.objectFont = objectFont;
+}
+
+var rock = new Choice("Kamień", "label-default", "rock");
+var paper = new Choice("Papier", "label-danger", "paper");
+var scissors = new Choice("Nożyce", "label-primary", "scissors");
+var lizard = new Choice("Jaszczurka", "label-success", "lizard");
+var spock = new Choice("Spock", "label-info", "spock");
+
+/*
+badge label-default - Kamień
+badge label-danger - Papier
+badge label-primary - Nożyce
+badge label-success - Jaszczurka
+badge label-info - Spock
+*/
+/*
+var rock = {
+      name: 'Kamień',
+      myClass: 'badge label-default'
+    },
+    paper = {
+      name: 'Papier',
+      myClass: 'badge label-danger'
+    },
+    scissors = {
+      name: 'Nożyce',
+      myClass: 'badge label-primary'
+    },
+    lizard = {
+      name: 'Jaszczurka',
+      myClass: 'badge label-success'
+    },
+    spock = {
+      name: 'Spock',
+      myClass: 'badge label-info'
+    };
+*/
 var newGameElem = $('#js-newGameElement');
 var pickElem = $('#js-playerPickElement');
 var resultsElem = $('.js-resultsTableElement');
@@ -47,6 +89,8 @@ function setGameElements() {
         playerPickElem.text('Wybór gracza');
         computerResultElem.text('Wynik komputera');
         playerResultElem.text('Wynik gracza');
+        playerChoiceView.html('');
+        computerChoiceView.html('');
 
       break;
     case GameState.Ended:
@@ -58,8 +102,6 @@ function setGameElements() {
         resultsElem.css('display', 'none');
         playerChoiceView.css('display', 'none');
         computerChoiceView.css('display', 'none');
-        playerChoiceView.html('');
-        computerChoiceView.html('');
         $('#name').val('Gracz');
   }
 }
@@ -117,21 +159,43 @@ function checkRoundWinner(playerPick, computerPick) {
   setGamePoints();
 }
 
-function playerPick(playerPick) {
-  var computerPick = getComputerPick();
+function choiceStringToObject(choiceString) {
+    switch (choiceString) {
+        case "rock":
+            return rock;
+        break;
+        case "paper":
+            return paper;
+        break;
+        case "scissors":
+            return scissors;
+        break;
+        case "lizard":
+            return lizard;
+        break;
+        case "spock":
+            return spock;
+        break;
+    }
+}
 
-  playerPickElem.text(playerPick).hide().fadeIn(1000);
-  computerPickElem.text(computerPick).hide().fadeIn(1500);
-  //$( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
-  playerChoiceView.html("<span class='badge '><i class='fa fa-hand-" + playerPick + "-o fa-5x' aria-hidden='true'></i></span>").hide().fadeIn(1000);
-  computerChoiceView.html('<span class="badge "><i class="fa fa-hand-' + computerPick + '-o fa-5x" aria-hidden="true"></i></span>').hide().fadeIn(1500);
+function playerPick(pickString) {
+  var computerPick = choiceStringToObject(getComputerPick());
+  var playerPick = choiceStringToObject(pickString);
+
+  playerChoiceView.html("<div class='" + playerPick.objectClass + "'><span class='badge'><i class='fa fa-hand-" + playerPick.objectFont + "-o fa-5x' aria-hidden='true'></i></span></div>").hide().fadeIn(100, function() {
+    playerPickElem.text(playerPick.objectName);
+    computerChoiceView.html("<div class='" + computerPick.objectClass + "'><span class='badge'><i class='fa fa-hand-" + computerPick.objectFont + "-o fa-5x' aria-hidden='true'></i></span></div>").hide().fadeIn(1600, function() {
+      computerPickElem.text(computerPick.objectName);
+    });
+  });
 
   $("#js-playerPickElement button").prop( "disabled", true );
   setTimeout(function() {
     $("#js-playerPickElement button").prop( "disabled", false );
-  }, 2000);
+  }, 2000); // ma byc 2000
 
-  checkRoundWinner(playerPick, computerPick);
+  checkRoundWinner(playerPick.objectFont, computerPick.objectFont);
   checkWiner();
 }
 

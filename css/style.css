@@ -1,3 +1,7 @@
+body {
+  background: url("../img/squairy_light.png");
+}
+
 div.container {
   padding: 10px 0;
 }
@@ -8,8 +12,15 @@ div.container {
   max-width: 300px;
 }
 
-button.badge, button span.badge, button i.badge {
+button.badge, button span.badge, button i.badge, #js-playerChoiceView span.badge, #js-computerChoiceView span.badge {
   background-color: inherit;
+}
+
+#js-playerChoiceView div, #js-computerChoiceView div {
+  border-radius: 5px;
+}
+#js-playerChoiceView i, #js-computerChoiceView i {
+  padding: 10px;
 }
 
 .mainView {
