@@ -12,24 +12,30 @@
 </head>
 <body>
   <div class="container">
-    <h3 class="text-center">
-      Witaj w grze<br><br>
+
+    <!-- Welcome -->
+    <h3 id="js-welcome" class="text-center">
+      <span id="gameWelcome">Witaj w grze</span><br>
       <span class="label label-default">Kamień</span>
       <span class="label label-danger">Papier</span>
       <span class="label label-primary">Nożyce</span>
       <span class="label label-success">Jaszczurka</span>
       <span class="label label-info">Spock</span>
     </h3>
+    <!-- Score -->
     <h2 id="js-playerResult" class="text-center">
       Wynik
     </h2>
+
     <div class="mainView">
-      <div class="text-center js-resultsTableElement">
+
+      <!-- Player -->
+      <div class="text-center js-resultsTableElement col-md-2 col-sm-3">
         <span id="js-playerPoints" class="badge">
-        0
+          0
         </span>
         <span id="js-playerName">
-        Imię gracza
+          Imię gracza
         </span>
         <div class="text-center">
           <span id="js-playerPick">
@@ -40,15 +46,19 @@
         </div>
       </div>
 
-      <div class="imgElement">
+      <!-- Cheats -->
+      <div class="imgElement col-md-5 col-sm-6">
         <img src="img/howToPlay.png" class="img-responsive img-howToPlay" alt="how to play">
       </div>
 
-      <div class="text-center js-resultsTableElement">
+      <!-- Computer -->
+      <div class="text-center js-resultsTableElement  col-md-2 col-sm-3">
         <span id="js-computerPoints" class="badge">
-        0
+          0
         </span>
-        Komputer
+        <span id="js-computerName">
+          Komputer
+        </span>
         <div class="text-center">
           <span id="js-computerPick">
             Wybór komputera
@@ -57,15 +67,15 @@
         <div id="js-computerChoiceView" class="text-center">
         </div>
       </div>
+    </div><!-- end mainView -->
+  </div><!-- end container -->
 
-    </div>
-
-  </div>
+  <!-- New game -->
   <div id="js-newGameElement" class="container">
     <div class="row text-center">
       <form id="js-newGameForm" class="form-inline">
         <div class="form-group">
-          <label for="name">Podaj swoje imię:</label>
+          <label class="playerNameLabel" for="name">Podaj swoje imię:</label>
           <input type="text" class="form-control" id="name" value="Gracz">
         </div>
         <button type="button" id="js-newGameButton" class="btn btn-lg btn-warning">
@@ -74,14 +84,27 @@
       </form>
     </div>
   </div>
-  <div id="js-onceMore" class="container">
-    <div class="row text-center">
-      <span>Było super gram jeszcze raz</span>
-      <button type="button" id="js-onceMoreButton" class="btn btn-lg btn-warning">
-        Nowa Gra
-      </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Gra skończona</h4>
+        </div>
+        <div class="modal-body">
+          <span id="js-gameWinner"></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+          <button type="button" id="js-onceMoreButton" class="btn btn-warning">Gram jeszcze raz</button>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Buttons -->
   <div id="js-playerPickElement" class="container">
     <div class="row text-center">
       <button id="js-playerPick_rock" class="btn label-default choice" data-choice="rock">
@@ -110,7 +133,8 @@
         </span>
       </button>
     </div>
-  </div>
+  </div><!-- end buttons -->
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

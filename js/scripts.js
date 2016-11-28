@@ -27,6 +27,7 @@ var playerName = $('#js-playerName');
 var playerChoiceView = $("#js-playerChoiceView");
 var computerChoiceView = $('#js-computerChoiceView');
 var playOnceMore = $("#js-onceMore");
+var welcomeElement = $('#js-welcome');
 
 newGameBtn.on('click', function() {
   player.name = $("#name").val();
@@ -55,12 +56,14 @@ function setGameElements() {
         resultsElem.css('display', 'block');
         playerChoiceView.css('display', 'block');
         computerChoiceView.css('display', 'block');
+        playerResultElem.css('display', 'block');
         computerPickElem.text('Wybór komputera');
         playerPickElem.text('Wybór gracza');
         playerResultElem.text('Wynik');
         playerChoiceView.html('');
         computerChoiceView.html('');
         playOnceMore.css('display', 'none');
+        welcomeElement.css('display', 'none');
 
       break;
     case GameState.Ended:
@@ -74,6 +77,8 @@ function setGameElements() {
         computerChoiceView.css('display', 'none');
         $('#name').val('Gracz');
         playOnceMore.css('display', 'none');
+        playerResultElem.css('display', 'none');
+        welcomeElement.css('display', 'block');
   }
 }
 
@@ -115,15 +120,15 @@ function checkRoundWinner(playerPick, computerPick) {
 
   if (winnerIs == 'player') {
     playerResultElem.text('Wygrana!').hide().fadeIn(2000);
-    playerResultElem.removeClass().addClass("text-center text-success");
+    playerResultElem.removeClass().addClass("text-center result-success");
     player.score++;
   } else if (winnerIs == 'computer') {
     playerResultElem.text('Przegrana!').hide().fadeIn(2000);
-    playerResultElem.removeClass().addClass("text-center text-danger");
+    playerResultElem.removeClass().addClass("text-center result-danger");
     computer.score++;
   } else {
     playerResultElem.text('Remis!').hide().fadeIn(2000);
-    playerResultElem.removeClass().addClass("text-center text-warning");
+    playerResultElem.removeClass().addClass("text-center result-warning");
   }
   setGamePoints();
 }
@@ -175,10 +180,10 @@ function setGamePoints() {
 
 // check if player or computer have 10 points
 function checkWiner() {
-  if (player.score == 3) {  //ma byc 10
+  if (player.score == 10) {  //ma byc 10
     pickElem.css('display', 'none');
     onceMore("Wygrałeś");
-  } else if (computer.score == 3) {  //ma byc 10
+  } else if (computer.score == 10) {  //ma byc 10
     pickElem.css('display', 'none');
     onceMore("Przegrałeś");
   }
@@ -187,8 +192,13 @@ function checkWiner() {
 function onceMore(text) {
   gameState = GameState.Ended;
   playOnceMore.css('display', 'block');
+  setTimeout(function() {
+    $('#myModal').modal('show');
+  }, 3000);
+  $('#js-gameWinner').text(text + " z wynikiem " + player.score + ":" + computer.score);
   $("#js-onceMoreButton").on('click', function() {
     playOnceMore.css('display', 'none');
+    $('#myModal').modal('hide');
     newGameElem.css('display', 'block');
   });
   setGamePoints();
