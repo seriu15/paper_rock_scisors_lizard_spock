@@ -59,7 +59,7 @@ function setGameElements() {
         playerResultElem.css('display', 'block');
         computerPickElem.text('Wybór komputera');
         playerPickElem.text('Wybór gracza');
-        playerResultElem.text('Wynik');
+        playerResultElem.text('Wynik').removeClass().addClass("text-center");;
         playerChoiceView.html('');
         computerChoiceView.html('');
         playOnceMore.css('display', 'none');
@@ -180,11 +180,10 @@ function setGamePoints() {
 
 // check if player or computer have 10 points
 function checkWiner() {
-  if (player.score == 10) {  //ma byc 10
+  if (player.score == 2) {  // when player win (10)
     pickElem.css('display', 'none');
     onceMore("Wygrałeś");
-  } else if (computer.score == 10) {  //ma byc 10
-    pickElem.css('display', 'none');
+  } else if (computer.score == 2) {  // when computer win (10)
     onceMore("Przegrałeś");
   }
 }
@@ -199,6 +198,9 @@ function onceMore(text) {
   $("#js-onceMoreButton").on('click', function() {
     playOnceMore.css('display', 'none');
     $('#myModal').modal('hide');
+    newGame();
+  });
+  $('#js-cancelButton').on('click', function() {
     newGameElem.css('display', 'block');
   });
   setGamePoints();
